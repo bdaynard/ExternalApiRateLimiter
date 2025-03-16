@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  sms-service:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=5000
+    ports:
+      - "5000:5000"
