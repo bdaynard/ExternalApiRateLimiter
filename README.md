@@ -45,81 +45,86 @@ Finally, to run the integration tests, navigate to ExternalApiRateLimiter.Tests 
 
 The results from the load test can be seen here:
 
-scenario: global_limit_scenario
-  - ok count: 29993
-  - fail count: 0
-  - all data: 4.2 MB
-  - duration: 00:00:30
+> scenario stats
 
-load simulations: 
-  - inject, rate: 1000, interval: 00:00:01, during: 00:00:30
 
-+-------------------------+------------------------------------------------------+
-| step                    | ok stats                                             |
-+-------------------------+------------------------------------------------------+
-| name                    | global information                                   |
-+-------------------------+------------------------------------------------------+
-| request count           | all = 29993, ok = 29993, RPS = 999.8                 |
-+-------------------------+------------------------------------------------------+
-| latency (ms)            | min = 1.48, mean = 5.55, max = 81.03, StdDev = 4.47  |
-+-------------------------+------------------------------------------------------+
-| latency percentile (ms) | p50 = 3.94, p75 = 5.18, p95 = 13.99, p99 = 22.5      |
-+-------------------------+------------------------------------------------------+
-| data transfer (KB)      | min = 0.145, mean = 0.145, max = 0.145, all = 4.2 MB |
-+-------------------------+------------------------------------------------------+
 
-status codes for scenario: global_limit_scenario
-+-------------+-------+---------+
-| status code | count | message |
-+-------------+-------+---------+
-| OK          | 29993 |         |
-+-------------+-------+---------+
+scenario: `global_limit_scenario`
 
-scenario: static_number_scenario
-  - ok count: 1922
-  - fail count: 261
-  - all data: 0.3 MB
-  - duration: 00:00:30
+  - ok count: `29993`
 
-load simulations: 
-  - ramping_inject, rate: 150, interval: 00:00:01, during: 00:00:30
+  - fail count: `0`
 
-+-------------------------+------------------------------------------------------+
-| step                    | ok stats                                             |
-+-------------------------+------------------------------------------------------+
-| name                    | global information                                   |
-+-------------------------+------------------------------------------------------+
-| request count           | all = 2183, ok = 1922, RPS = 64.1                    |
-+-------------------------+------------------------------------------------------+
-| latency (ms)            | min = 1.86, mean = 5.91, max = 53.67, StdDev = 5.04  |
-+-------------------------+------------------------------------------------------+
-| latency percentile (ms) | p50 = 3.98, p75 = 5.5, p95 = 14.5, p99 = 24.64       |
-+-------------------------+------------------------------------------------------+
-| data transfer (KB)      | min = 0.145, mean = 0.145, max = 0.145, all = 0.3 MB |
-+-------------------------+------------------------------------------------------+
+  - all data: `4.2` MB
 
-+-------------------------+------------------------------------------------------+
-| step                    | failures stats                                       |
-+-------------------------+------------------------------------------------------+
-| name                    | global information                                   |
-+-------------------------+------------------------------------------------------+
-| request count           | all = 2183, fail = 261, RPS = 8.7                    |
-+-------------------------+------------------------------------------------------+
-| latency (ms)            | min = 2.24, mean = 4.83, max = 21.97, StdDev = 3.37  |
-+-------------------------+------------------------------------------------------+
-| latency percentile (ms) | p50 = 3.7, p75 = 4.31, p95 = 11.59, p99 = 21.49      |
-+-------------------------+------------------------------------------------------+
-| data transfer (KB)      | min = 0.115, mean = 0.115, max = 0.115, all = 0.0 MB |
-+-------------------------+------------------------------------------------------+
+  - duration: `00:00:30`
 
-status codes for scenario: static_number_scenario
-+-----------------+-------+---------+
-| status code     | count | message |
-+-----------------+-------+---------+
-| OK              | 1922  |         |
-+-----------------+-------+---------+
-| TooManyRequests | 261   |         |
-+-----------------+-------+---------+
+load simulations:
+
+  - `inject`, rate: `1000`, interval: `00:00:01`, during: `00:00:30`
+
+|step|ok stats|
+|---|---|
+|name|`global information`|
+|request count|all = `29993`, ok = `29993`, RPS = `999.8`|
+|latency (ms)|min = `1.48`, mean = `5.55`, max = `81.03`, StdDev = `4.47`|
+|latency percentile (ms)|p50 = `3.94`, p75 = `5.18`, p95 = `13.99`, p99 = `22.5`|
+|data transfer (KB)|min = `0.145`, mean = `0.145`, max = `0.145`, all = `4.2` MB|
+
+
+> status codes for scenario: `global_limit_scenario`
+
+
+
+|status code|count|message|
+|---|---|---|
+|OK|29993||
+
+
+> scenario stats
+
+
+
+scenario: `static_number_scenario`
+
+  - ok count: `1922`
+
+  - fail count: `261`
+
+  - all data: `0.3` MB
+
+  - duration: `00:00:30`
+
+load simulations:
+
+  - `ramping_inject`, rate: `150`, interval: `00:00:01`, during: `00:00:30`
+
+|step|ok stats|
+|---|---|
+|name|`global information`|
+|request count|all = `2183`, ok = `1922`, RPS = `64.1`|
+|latency (ms)|min = `1.86`, mean = `5.91`, max = `53.67`, StdDev = `5.04`|
+|latency percentile (ms)|p50 = `3.98`, p75 = `5.5`, p95 = `14.5`, p99 = `24.64`|
+|data transfer (KB)|min = `0.145`, mean = `0.145`, max = `0.145`, all = `0.3` MB|
+
+
+|step|failures stats|
+|---|---|
+|name|`global information`|
+|request count|all = `2183`, fail = `261`, RPS = `8.7`|
+|latency (ms)|min = `2.24`, mean = `4.83`, max = `21.97`, StdDev = `3.37`|
+|latency percentile (ms)|p50 = `3.7`, p75 = `4.31`, p95 = `11.59`, p99 = `21.49`|
+|data transfer (KB)|min = `0.115`, mean = `0.115`, max = `0.115`, all = `0.0` MB|
+
+
+> status codes for scenario: `static_number_scenario`
+
+
+
+|status code|count|message|
+|---|---|---|
+|OK|1922||
+|TooManyRequests|261||
 
 Some key points are:
 
