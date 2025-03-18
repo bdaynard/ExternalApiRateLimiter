@@ -14,9 +14,9 @@ builder.Services.AddRateLimiter(options =>
     {
         var phoneNumber = httpContext.Request.RouteValues["phoneNumber"]?.ToString() ?? "unknown";
         var rateSettings = builder.Configuration.GetSection(Constants.RateLimitSettings).GetSection(Constants.NumberLimits);
-        return RedisRateLimitPartition.GetFixedWindowRateLimiter(
+        return RedisRateLimitPartition.GetSlidingWindowRateLimiter(
             partitionKey: phoneNumber,
-            factory: _ => new RedisFixedWindowRateLimiterOptions
+            factory: _ => new RedisSlidingWindowRateLimiterOptions
             {
                 ConnectionMultiplexerFactory = () => redis,
                 PermitLimit = rateSettings.GetValue<int>(Constants.PermitLimit),
@@ -27,8 +27,8 @@ builder.Services.AddRateLimiter(options =>
 
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context => {
         var rateSettings = builder.Configuration.GetSection(Constants.RateLimitSettings).GetSection(Constants.GlobalLimits);
-        return RedisRateLimitPartition.GetFixedWindowRateLimiter("global", (opt) => 
-            new RedisFixedWindowRateLimiterOptions{
+        return RedisRateLimitPartition.GetSlidingWindowRateLimiter("global", (opt) => 
+            new RedisSlidingWindowRateLimiterOptions{
                 ConnectionMultiplexerFactory = () => redis,
                 PermitLimit = rateSettings.GetValue<int>(Constants.PermitLimit),
                 Window = TimeSpan.FromSeconds(rateSettings.GetValue<int>(Constants.WindowInSeconds))
