@@ -8,8 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 var redisHost = builder.Configuration.GetConnectionString("Cache");
 var redis = ConnectionMultiplexer.Connect(redisHost ?? throw new ArgumentException("Invalid Redis Connection"));
 
+// Adds Rate Limiting middleware to the service.
 builder.Services.AddRateLimiter(options =>
 {
+    // Policy that checks that a specific phone number has not exceeded the limits.
     options.AddPolicy("PerNumberRateLimit", httpContext =>
     {
         var phoneNumber = httpContext.Request.RouteValues["phoneNumber"]?.ToString() ?? "unknown";
@@ -25,6 +27,7 @@ builder.Services.AddRateLimiter(options =>
         );
     });
 
+    // Policy that checks that the overall number of requests have not exceeded the limit.
     options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context => {
         var rateSettings = builder.Configuration.GetSection(Constants.RateLimitSettings).GetSection(Constants.GlobalLimits);
         return RedisRateLimitPartition.GetSlidingWindowRateLimiter("global", (opt) => 
@@ -35,6 +38,7 @@ builder.Services.AddRateLimiter(options =>
             });
     });
 
+    // In the case that the rate limit is met, this will throw a 429 back to the client.
     options.OnRejected = async (context, token) =>
     {
         var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<Program>>();
@@ -51,7 +55,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
