@@ -1,4 +1,4 @@
-#A .NET Core Rate Limiting Microservice
+# A .NET Core Rate Limiting Microservice
 
 This project was to demonstrate how a .NET Core microservice could be used to rate limit calls.
 For further context, imagine that your business calls some third party API to perform some action (in my case, sending out an SMS).
@@ -14,14 +14,14 @@ Finally, in order to better simulate what would work in a distrubted system, par
 I've added Redis using the [aspnetcore-redis-rate-limiting](https://github.com/cristipufu/aspnetcore-redis-rate-limiting) extension for
 the rate limiting middleware. As a result, you'll need to be running Redis in order to use the service.
 
-#Contents
+# Contents
 
 This solution consists of 3 projects:
 * ExternalApiRateLimiter - the .NET Core microservice
 * ExternalApiRateLimiter.Tests - Some integration tests written using XUnit to test the rate limiting
 * ExternalApiRateLimiter.LoadTests - A load test written using NBomber to test the performance
 
-#Running The Application
+# Running The Application
 
 To run the application you can navigate into the ExternalApiRateLimiter project and run:
 
@@ -41,7 +41,7 @@ Finally, to run the integration tests, navigate to ExternalApiRateLimiter.Tests 
 
 `dotnet test`.
 
-#Future Improvements
+# Future Improvements
 
 Some ideas for future improvements to the application are:
 
