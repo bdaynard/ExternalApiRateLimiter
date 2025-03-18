@@ -12,7 +12,7 @@ edge of the window and then reset as the window rollsover.
 
 Finally, in order to better simulate what would work in a distrubted system, particuarly if this service was needed to scale horizontally,
 I've added Redis using the [aspnetcore-redis-rate-limiting](https://github.com/cristipufu/aspnetcore-redis-rate-limiting) extension for
-the rate limiting middleware. As a result, you'll need to be running Redis in order to use the service.
+the rate limiting middleware. This middleware also ensures key cleanup, using the Window option provided as the lifetime of the key. As a result, you'll need to be running Redis in order to use the service.
 
 # Contents
 
