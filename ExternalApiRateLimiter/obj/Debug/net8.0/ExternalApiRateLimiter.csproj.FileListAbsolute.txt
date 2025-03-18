@@ -21,6 +21,7 @@ C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\ExternalApiRateLimiter
 C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\ExternalApiRateLimiter.csproj.CoreCompileInputs.cache
 C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\ExternalApiRateLimiter.MvcApplicationPartsAssemblyInfo.cs
 C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\ExternalApiRateLimiter.MvcApplicationPartsAssemblyInfo.cache
+C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\ExternalApiRateLimiter.sourcelink.json
 C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\staticwebassets.build.json
 C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\staticwebassets.development.json
 C:\Repos\TapMango\ExternalApiRateLimiter\obj\Debug\net8.0\staticwebassets\msbuild.ExternalApiRateLimiter.Microsoft.AspNetCore.StaticWebAssets.props
